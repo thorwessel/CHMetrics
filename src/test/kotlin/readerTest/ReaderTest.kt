@@ -4,8 +4,8 @@ import exceptions.NoPathSet
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import reader.Reader
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ReaderTest {
     // Test CSV file
@@ -40,9 +40,7 @@ class ReaderTest {
     fun `Reader returns number of tickets within specific month`() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
-        println(testReader.numberOfTickets("Jun"))
 
-
-        assert(testReader.numberOfTickets("Jun") == 12)
+        assert(testReader.numberOfTickets("6") == 63)
     }
 }

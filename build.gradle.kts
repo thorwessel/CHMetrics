@@ -9,11 +9,13 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
+    implementation("joda-time:joda-time:2.10.4")
     implementation("org.apache.commons:commons-csv:1.7")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.1.0")

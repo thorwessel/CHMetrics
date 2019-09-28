@@ -5,6 +5,8 @@ import java.nio.file.*
 import java.nio.file.Paths
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
+import org.joda.time.DateTime
+import java.text.SimpleDateFormat
 
 
 class Reader {
@@ -22,13 +24,26 @@ class Reader {
         return false
     }
 
-    fun numberOfTickets(): Int {
+    fun numberOfTickets(month: String = ""): Int {
         if (CSVPath == "") throw NoPathSet()
+
         val reader = Files.newBufferedReader(Paths.get(CSVPath))
         val csvParser = CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())
+
+        return if (month == "") {
+            csvParser.count()
+        } else {
+            getNumberOfTicketsIn(csvParser, month)
+        }
+    }
+
+    private fun getNumberOfTicketsIn(csvParser: CSVParser, period: String): Int {
         var numberOfRows = 0
+        val rowMonthParser = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
+
         csvParser.forEach {
-            numberOfRows += 1
+            val dateFromRow = rowMonthParser.parse(it[7])
+            if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) numberOfRows += 1
         }
 
         return numberOfRows
