@@ -33,11 +33,11 @@ class Reader {
         return if (month == "") {
             csvParser.count()
         } else {
-            getNumberOfTicketsIn(csvParser, month)
+            getNumberOfTicketsInMonth(csvParser, month)
         }
     }
 
-    private fun getNumberOfTicketsIn(csvParser: CSVParser, period: String): Int {
+    private fun getNumberOfTicketsInMonth(csvParser: CSVParser, period: String): Int {
         var numberOfRows = 0
         val rowMonthParser = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
