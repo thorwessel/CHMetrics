@@ -1,5 +1,6 @@
 package reader
 
+import exceptions.NoPathSet
 import java.nio.file.*
 import java.nio.file.Paths
 import org.apache.commons.csv.CSVFormat
@@ -21,8 +22,9 @@ class Reader {
         return false
     }
 
-    fun numberOfTickets(path: String): Int {
-        val reader = Files.newBufferedReader(Paths.get(path))
+    fun numberOfTickets(): Int {
+        if (CSVPath == "") throw NoPathSet()
+        val reader = Files.newBufferedReader(Paths.get(CSVPath))
         val csvParser = CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())
         var numberOfRows = 0
         csvParser.forEach {
