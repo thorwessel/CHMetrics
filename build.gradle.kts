@@ -13,6 +13,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+
+    implementation("org.apache.commons:commons-csv:1.7")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.1.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.1.0")
     testImplementation("io.mockk:mockk:1.9.3")
