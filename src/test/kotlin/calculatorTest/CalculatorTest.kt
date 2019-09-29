@@ -1,16 +1,11 @@
 package calculatorTest
 
 import calculator.Calculator
-import exceptions.NoPathSet
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
-import models.Labels
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
-import org.apache.commons.csv.CSVRecord
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import reader.Reader
 import java.nio.file.Files
 import java.nio.file.Paths
