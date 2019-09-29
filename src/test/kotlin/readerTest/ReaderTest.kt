@@ -4,8 +4,6 @@ import exceptions.NoPathSet
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import reader.Reader
-import java.text.SimpleDateFormat
-import java.util.Date
 
 class ReaderTest {
     // Test CSV file
@@ -26,21 +24,30 @@ class ReaderTest {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTickets() == numberOfEntries)
+        assert(testReader.numberOfTicketsCreated() == numberOfEntries)
     }
 
     @Test
     fun `Reader throws NoPathSet exception if path has not been set`() {
         val testReader = Reader()
 
-        assertThrows<NoPathSet> { testReader.numberOfTickets() }
+        assertThrows<NoPathSet> { testReader.numberOfTicketsCreated() }
     }
 
     @Test
-    fun `Reader returns number of tickets within specific month`() {
+    fun `Reader returns number of created tickets within specific month`() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTickets("6") == 63)
+        assert(testReader.numberOfTicketsCreated("6") == 63)
+    }
+
+    @Test
+    fun `Reader returns number of completed tickets with specific month `() {
+        val testReader = Reader()
+        testReader.testAndSetPath(TestCSVPath)
+
+        assert(testReader.numberOfTicketsCompleted("6") == 45)
+
     }
 }
