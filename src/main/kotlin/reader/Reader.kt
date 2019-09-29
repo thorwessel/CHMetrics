@@ -5,6 +5,7 @@ import java.nio.file.*
 import java.nio.file.Paths
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
+import org.apache.commons.csv.CSVRecord
 import org.joda.time.DateTime
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -27,23 +28,21 @@ class Reader {
         return false
     }
 
-    fun numberOfTicketsCreated(month: String = ""): Int {
+    fun numberOfTicketsCreated(month: String = ""): List<CSVRecord> {
         val csvParser = getParsedCsv()
 
         return if (month == "") {
-            csvParser.count()
+            csvParser.toList()
         } else {
             getNumberOfTicketsInMonth(csvParser, month, createdAtRowIndex)
         }
     }
 
-    fun numberOfTicketsCompleted(month: String = ""): Int {
+    fun numberOfTicketsCompleted(month: String = ""): List<CSVRecord> {
         val csvParser = getParsedCsv()
 
         return if (month == "") {
-            csvParser.filter {
-                it[5] == "true"
-            }.count()
+            csvParser.filter { it[5] == "true" }
         } else {
             getNumberOfTicketsInMonth(csvParser, month, completedAtRowIndex)
         }
@@ -55,20 +54,20 @@ class Reader {
         return CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())
     }
 
-    private fun getNumberOfTicketsInMonth(csvParser: CSVParser, period: String, row: Int): Int {
-        var numberOfRows = 0
+    private fun getNumberOfTicketsInMonth(csvParser: CSVParser, period: String, row: Int): List<CSVRecord> {
+        val numberOfRows = mutableListOf<CSVRecord>()
         val rowMonthParser = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
         csvParser.forEach {
             try {
                 val dateFromRow = rowMonthParser.parse(it[row])
-                if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) numberOfRows += 1
+                if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) numberOfRows.add(it)
             } catch (e: ParseException) {
                 //Date field is likely empty
             }
         }
 
-        return numberOfRows
+        return numberOfRows.toList()
     }
 
 }

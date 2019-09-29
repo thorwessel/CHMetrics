@@ -24,7 +24,7 @@ class ReaderTest {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTicketsCreated() == numberOfEntries)
+        assert(testReader.numberOfTicketsCreated().count() == numberOfEntries)
     }
 
     @Test
@@ -39,7 +39,7 @@ class ReaderTest {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTicketsCreated("6") == 63)
+        assert(testReader.numberOfTicketsCreated("6").count() == 63)
     }
 
     @Test
@@ -47,7 +47,7 @@ class ReaderTest {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTicketsCompleted("6") == 45)
+        assert(testReader.numberOfTicketsCompleted("6").count() == 45)
 
     }
 }
