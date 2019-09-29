@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat
 
 
 class Reader {
+    private val createdAtRowIndex = 7
+
     @Suppress("PrivatePropertyName")
     private var CSVPath = ""
 
@@ -42,7 +44,7 @@ class Reader {
         val rowMonthParser = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
         csvParser.forEach {
-            val dateFromRow = rowMonthParser.parse(it[7])
+            val dateFromRow = rowMonthParser.parse(it[createdAtRowIndex])
             if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) numberOfRows += 1
         }
 
