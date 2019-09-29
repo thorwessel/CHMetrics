@@ -1,6 +1,7 @@
 package readerTest
 
 import exceptions.NoPathSet
+import models.Labels
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import reader.Reader
@@ -20,7 +21,7 @@ class ReaderTest {
     }
 
     @Test
-    fun `Reader opens CSV and find number of entries minus header row`() {
+    fun `Reader opens CSV and return list of entries minus header row`() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
@@ -35,7 +36,7 @@ class ReaderTest {
     }
 
     @Test
-    fun `Reader returns number of created tickets within specific month`() {
+    fun `Reader returns list of created tickets within specific month`() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
@@ -43,11 +44,19 @@ class ReaderTest {
     }
 
     @Test
-    fun `Reader returns number of completed tickets with specific month `() {
+    fun `Reader returns list of completed tickets with specific month `() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
         assert(testReader.numberOfTicketsCompleted("6").count() == 45)
+    }
 
+    @Test
+    fun `Reader returns list of tickets with specific label`() {
+        val testReader = Reader()
+        testReader.testAndSetPath(TestCSVPath)
+        val listOfTickets = testReader.numberOfTicketsCreated("1")
+
+        assert(testReader.numberOfTicketsWithLabel(Labels.WALLET_LOAD, listOfTickets).count() == 3)
     }
 }

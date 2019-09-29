@@ -1,6 +1,7 @@
 package reader
 
 import exceptions.NoPathSet
+import models.Labels
 import java.nio.file.*
 import java.nio.file.Paths
 import org.apache.commons.csv.CSVFormat
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat
 class Reader {
     private val createdAtRowIndex = 7
     private val completedAtRowIndex = 11
+    private val labelRow = 18
 
     @Suppress("PrivatePropertyName")
     private var CSVPath = ""
@@ -55,19 +57,25 @@ class Reader {
     }
 
     private fun getNumberOfTicketsInMonth(csvParser: CSVParser, period: String, row: Int): List<CSVRecord> {
-        val numberOfRows = mutableListOf<CSVRecord>()
+        val workingList = mutableListOf<CSVRecord>()
         val rowMonthParser = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
         csvParser.forEach {
             try {
                 val dateFromRow = rowMonthParser.parse(it[row])
-                if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) numberOfRows.add(it)
+                if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) workingList.add(it)
             } catch (e: ParseException) {
                 //Date field is likely empty
             }
         }
 
-        return numberOfRows.toList()
+        return workingList.toList()
+    }
+
+    fun numberOfTicketsWithLabel(label: Labels, listOfRows: List<CSVRecord>): List<CSVRecord> {
+        return listOfRows.filter {
+            it[labelRow].contains(label.string)
+        }
     }
 
 }
