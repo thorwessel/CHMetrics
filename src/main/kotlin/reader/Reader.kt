@@ -44,7 +44,7 @@ class Reader {
         val csvParser = getParsedCsv()
 
         return if (month == "") {
-            csvParser.filter { it[5] == "true" }
+            csvParser.filter { it[6] == "true" }
         } else {
             getNumberOfTicketsInMonth(csvParser, month, completedAtRowIndex)
         }

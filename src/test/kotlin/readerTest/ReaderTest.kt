@@ -44,6 +44,14 @@ class ReaderTest {
     }
 
     @Test
+    fun `Reader opens CSV and return list of completed tickets minus header row`() {
+        val testReader = Reader()
+        testReader.testAndSetPath(TestCSVPath)
+
+        assert(testReader.numberOfTicketsCompleted().count() == 604)
+    }
+
+    @Test
     fun `Reader returns list of completed tickets with specific month `() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
