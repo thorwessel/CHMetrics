@@ -10,6 +10,7 @@ class ReaderTest {
     // Test CSV file
     @Suppress("PrivatePropertyName")
     private val TestCSVPath = "C:\\Users\\thor_\\IdeaProjects\\CHMetrics/CHExport.csv"
+
     //Test file right now is 612 lines in total without the header
     private val numberOfEntries = 612
 
