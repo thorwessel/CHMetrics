@@ -9,7 +9,9 @@ import reader.Reader
 class ReaderTest {
     // Test CSV file
     @Suppress("PrivatePropertyName")
-    private val TestCSVPath = "C:\\Users\\thor_\\IdeaProjects\\CHMetrics/CHExport.csv"
+    private val TestCSVPath = "/Users/thorwessel/Documents/testCHexport.csv"
+    // MAC: private val TestCSVPath = "/Users/thorwessel/Documents/testCHexport.csv"
+    // PC: private val TestCSVPath = "C:\\Users\\thor_\\IdeaProjects\\CHMetrics/CHExport.csv"
 
     //Test file right now is 612 lines in total without the header
     private val numberOfEntries = 612
@@ -18,7 +20,7 @@ class ReaderTest {
     fun `Reader return false when CSV file path is invalid`() {
         val testReader = Reader()
 
-        assert(!testReader.testAndSetPath(""))
+        assert(!testReader.testAndSetPath("random"))
     }
 
     @Test

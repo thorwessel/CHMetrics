@@ -13,7 +13,10 @@ import java.nio.file.Paths
 class CalculatorTest {
 
     @Suppress("PrivatePropertyName")
-    private val TestCSVPath = "C:\\Users\\thor_\\IdeaProjects\\CHMetrics/CHExport.csv"
+    private val TestCSVPath = "/Users/thorwessel/Documents/testCHexport.csv"
+    // MAC: private val TestCSVPath = "/Users/thorwessel/Documents/testCHexport.csv"
+    // PC: private val TestCSVPath = "C:\\Users\\thor_\\IdeaProjects\\CHMetrics/CHExport.csv"
+
     // Something is up with the "reader", can't seem to be used twice.
     private val reader1 = Files.newBufferedReader(Paths.get(TestCSVPath))
     private val parsedTest1 = CSVParser(reader1, CSVFormat.DEFAULT.withFirstRecordAsHeader())
