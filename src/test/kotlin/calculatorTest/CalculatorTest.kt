@@ -41,4 +41,15 @@ class CalculatorTest {
         assert(testCalculator.getReport(readerMock.numberOfTicketsCreated(),
             readerMock.numberOfTicketsCompleted()) == expectedResult)
     }
+
+    @Test
+    fun `Return report with labels`() {
+        val readerMock = mockk<Reader> {
+            every { numberOfTicketsCreated(any()) } returns testCreatedList.toList()
+            every { numberOfTicketsCompleted(any()) } returns testCompletedList.toList()
+        }
+            val testCalculator = Calculator()
+
+            assert(testCalculator.getLabelReport(readerMock.numberOfTicketsCreated()) == 612)
+    }
 }

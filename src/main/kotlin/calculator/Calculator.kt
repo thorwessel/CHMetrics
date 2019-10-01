@@ -1,5 +1,6 @@
 package calculator
 
+import models.Labels
 import org.apache.commons.csv.CSVRecord
 
 class Calculator {
@@ -9,5 +10,9 @@ class Calculator {
             "Created" to createdList.count(),
             "Completed" to completedList.count()
         )
+    }
+
+    fun getLabelReport(listOfTickets: List<CSVRecord>): Int {
+        return listOfTickets.count()
     }
 }
