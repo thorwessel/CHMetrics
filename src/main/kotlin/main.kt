@@ -11,11 +11,11 @@ fun main() {
 
     if (!reader.testAndSetPath(TestCSVPath)) println("Check the path, something is wrong!")
 
-    val createdList = reader.numberOfTicketsCreated("9")
+    val createdList = reader.numberOfTicketsCreated(9)
 
     println(calculator.getReport(
         createdList,
-        reader.numberOfTicketsCompleted("9")
+        reader.numberOfTicketsCompleted(9)
     ))
 
     val labelsMap = mutableMapOf<Labels, Int>()

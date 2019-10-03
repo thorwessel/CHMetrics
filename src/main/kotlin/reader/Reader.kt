@@ -30,20 +30,20 @@ class Reader {
         return false
     }
 
-    fun numberOfTicketsCreated(month: String = ""): List<CSVRecord> {
+    fun numberOfTicketsCreated(month: Int = 0): List<CSVRecord> {
         val csvParser = getParsedCsv()
 
-        return if (month == "") {
+        return if (month == 0) {
             csvParser.toList()
         } else {
             getNumberOfTicketsInMonth(csvParser, month, createdAtRowIndex)
         }
     }
 
-    fun numberOfTicketsCompleted(month: String = ""): List<CSVRecord> {
+    fun numberOfTicketsCompleted(month: Int = 0): List<CSVRecord> {
         val csvParser = getParsedCsv()
 
-        return if (month == "") {
+        return if (month == 0) {
             csvParser.filter { it[6] == "true" }
         } else {
             getNumberOfTicketsInMonth(csvParser, month, completedAtRowIndex)
@@ -56,14 +56,14 @@ class Reader {
         return CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader())
     }
 
-    private fun getNumberOfTicketsInMonth(csvParser: CSVParser, period: String, row: Int): List<CSVRecord> {
+    private fun getNumberOfTicketsInMonth(csvParser: CSVParser, period: Int, row: Int): List<CSVRecord> {
         val workingList = mutableListOf<CSVRecord>()
         val rowMonthParser = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
 
         csvParser.forEach {
             try {
                 val dateFromRow = rowMonthParser.parse(it[row])
-                if (DateTime(dateFromRow).monthOfYear().get() == period.toInt()) workingList.add(it)
+                if (DateTime(dateFromRow).monthOfYear().get() == period) workingList.add(it)
             } catch (e: ParseException) {
                 //Date field is likely empty
             }

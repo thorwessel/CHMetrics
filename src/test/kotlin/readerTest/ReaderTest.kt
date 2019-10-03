@@ -43,7 +43,7 @@ class ReaderTest {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTicketsCreated("6").count() == 63)
+        assert(testReader.numberOfTicketsCreated(6).count() == 63)
     }
 
     @Test
@@ -59,14 +59,14 @@ class ReaderTest {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
 
-        assert(testReader.numberOfTicketsCompleted("6").count() == 45)
+        assert(testReader.numberOfTicketsCompleted(6).count() == 45)
     }
 
     @Test
     fun `Reader returns list of tickets with specific label`() {
         val testReader = Reader()
         testReader.testAndSetPath(TestCSVPath)
-        val listOfTickets = testReader.numberOfTicketsCreated("1")
+        val listOfTickets = testReader.numberOfTicketsCreated(1)
 
         assert(testReader.numberOfTicketsWithLabel(Labels.WALLET_LOAD, listOfTickets).count() == 3)
     }
